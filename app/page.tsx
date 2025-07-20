@@ -1,5 +1,5 @@
 import PatientCharts from './ui/patientsCharts'
-import PatientsTable from './ui/clientPatientsTable'
+import ClientGrid from './ui/clientPatientsTable'
 import { fetchPatients } from './lib/api/client'
 import { type PatientsResponse } from './lib/definitions'
 import { Suspense } from 'react'
@@ -13,7 +13,7 @@ export default async function Page() {
 			<Suspense fallback={<div>Loading...</div>}>
 				<div className="container mx-auto py-8">
 					<h1 className="text-2xl font-bold mb-6">Patients</h1>
-					<PatientsTable initialData={data} />
+					<ClientGrid initialData={data} />
 				</div>
 			</Suspense>
 			{/* Show data in a graph / chart */}

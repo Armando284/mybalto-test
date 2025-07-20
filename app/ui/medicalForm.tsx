@@ -8,6 +8,7 @@ import { fetchPatients } from '../lib/api/client'
 import { Item } from '../lib/definitions'
 import { MedicalFormData, medicalFormSchema } from '../lib/schemas'
 import { useState } from 'react'
+import { useGenerateStory } from '../hooks/useGenerateStory'
 
 export default function MedicalForm() {
 	const [selectedPet, setSelectedPet] = useState<Item | null>(null)
@@ -28,9 +29,27 @@ export default function MedicalForm() {
 		mode: 'onChange',
 	})
 
-	const onSubmit = (data: MedicalFormData) => {
-		console.log('Form submitted:', data)
-		alert('Form submitted successfully!')
+	const { mutate: generateStory, isPending: isGenerating } =
+		useGenerateStory()
+	const [generatedStory, setGeneratedStory] = useState('')
+
+	const onSubmit = async (data: MedicalFormData) => {
+		if (!selectedPet) return
+
+		generateStory(
+			{ formData: data, petInfo: selectedPet },
+			{
+				onSuccess: (response) => {
+					setGeneratedStory(response.story)
+					// Here I could submit the complete data to a DB
+					console.log('Story generated successfully:', response.story)
+				},
+				onError: (error) => {
+					console.error('Story generation failed:', error)
+					alert('Failed to generate story. Please try again.')
+				},
+			}
+		)
 	}
 
 	const handlePetSelect = (petId: number) => {
@@ -43,7 +62,6 @@ export default function MedicalForm() {
 			<h1 className="text-2xl font-bold text-center mb-6">
 				Pet Medical Assistance Request
 			</h1>
-
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className="space-y-8">
@@ -345,6 +363,37 @@ export default function MedicalForm() {
 					</button>
 				</div>
 			</form>
+			{generatedStory && (
+				<div className="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
+					<h2 className="text-xl font-semibold text-blue-800 mb-4">
+						Generated Fundraising Story
+					</h2>
+					<div className="prose max-w-none">
+						{generatedStory.split('\n').map((paragraph, i) => (
+							<p
+								key={i}
+								className="mb-4">
+								{paragraph}
+							</p>
+						))}
+					</div>
+					<button
+						onClick={() =>
+							navigator.clipboard.writeText(generatedStory)
+						}
+						className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+						Copy Story to Clipboard
+					</button>
+				</div>
+			)}
+			{isGenerating && (
+				<div className="mt-8 p-6 bg-gray-50 rounded-lg border border-gray-200 text-center">
+					<div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+					<p className="mt-4 text-gray-600">
+						Generating your pet's story...
+					</p>
+				</div>
+			)}
 		</div>
 	)
 }
