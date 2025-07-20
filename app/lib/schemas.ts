@@ -1,5 +1,6 @@
 // lib/schemas/patients.ts
 import { z } from 'zod';
+import { Item } from './definitions';
 
 const CurrentWeightUnitSchema = z.union([
   z.literal('lbs'),
@@ -90,3 +91,35 @@ export const PatientsResponseSchema = z.object({
 
 export type Patient = z.infer<typeof PatientSchema>;
 export type PatientsResponse = z.infer<typeof PatientsResponseSchema>;
+
+
+export const petSelectionSchema = z.object({
+  petId: z.coerce.number().min(1, "Please select a pet"),
+});
+
+export const medicalSituationSchema = z.object({
+  condition: z.string().min(10, "Please describe the condition in detail"),
+  conditionStartDate: z.date(),
+  recommendedTreatment: z.string().min(10, "Please describe the recommended treatment"),
+  estimatedCost: z.number().min(0, "Cost cannot be negative"),
+});
+
+export const petStorySchema = z.object({
+  ownershipDuration: z.string().min(1, "Please specify how long you've had the pet"),
+  specialMeaning: z.string().min(20, "Please share what makes your pet special"),
+  favoriteMemory: z.string().min(20, "Please share a favorite memory"),
+  familyImpact: z.string().min(20, "Please describe how this has affected your family"),
+});
+
+export const financialNeedSchema = z.object({
+  initialTreatmentCost: z.number().min(0, "Amount cannot be negative"),
+  otherHardships: z.string().min(20, "Please describe other financial hardships"),
+  fundingDeadline: z.date(),
+});
+
+export const medicalFormSchema = petSelectionSchema
+  .merge(medicalSituationSchema)
+  .merge(petStorySchema)
+  .merge(financialNeedSchema);
+
+export type MedicalFormData = z.infer<typeof medicalFormSchema>;
