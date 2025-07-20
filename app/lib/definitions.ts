@@ -2,8 +2,8 @@
 export type PatientsResponse = {
   itemsReceived: number;
   curPage: number;
-  nextPage: number;
-  prevPage: null;
+  nextPage: number | null;
+  prevPage: number | null;
   offset: number;
   perPage: number;
   itemsTotal: number;
@@ -25,7 +25,7 @@ export type Item = {
   ColorDescription: string;
   Gender: Gender;
   GenderDescription: GenderDescription;
-  EnteredDate: Date;
+  EnteredDate: Date | string;
   Deleted: boolean;
   IsDeceased: boolean;
   Inactive: boolean;
@@ -33,13 +33,13 @@ export type Item = {
   CurrentWeightUnit: CurrentWeightUnit;
   SiteId: string;
   SuspendReminders: boolean;
-  APICreateDate: Date;
-  APILastChangeDate?: Date;
+  APICreateDate: Date | string;
+  APILastChangeDate?: Date | string;
   clinicId: string;
   merged: boolean;
-  DateOfBirth?: Date;
-  DateOfDeath?: Date;
-  LastTransactionDate?: Date;
+  DateOfBirth?: Date | string;
+  DateOfDeath?: Date | string;
+  LastTransactionDate?: Date | string;
 }
 
 export type CurrentWeightUnit = "lbs" | "" | "g";

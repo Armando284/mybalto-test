@@ -1,4 +1,6 @@
-export const Patients = {
+import { PatientsResponse } from "./definitions";
+
+export const MockPatients: PatientsResponse = {
   "itemsReceived": 1000,
   "curPage": 1,
   "nextPage": 2,

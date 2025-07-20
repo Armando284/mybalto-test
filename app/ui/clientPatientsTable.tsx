@@ -2,7 +2,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { PatientsResponse } from '../lib/schemas'
+import { PatientsResponse } from '../lib/definitions'
 import { fetchPatients } from '../lib/api/client'
 import Pagination from '../ui/pagination'
 import { useState, useMemo } from 'react'
@@ -42,30 +42,33 @@ export default function ClientGrid({
 	})
 
 	const filteredItems = useMemo(() => {
-		return data.items.filter((patient) => {
-			return (
-				(filters.species === '' ||
-					patient.Species === filters.species) &&
-				(filters.gender === '' || patient.Gender === filters.gender) &&
-				(filters.isDeceased === null ||
-					patient.IsDeceased === filters.isDeceased) &&
-				(filters.searchQuery === '' ||
-					patient.Name.toLowerCase().includes(
-						filters.searchQuery.toLowerCase()
-					) ||
-					patient.BreedDescription.toLowerCase().includes(
-						filters.searchQuery.toLowerCase()
-					) ||
-					patient.covetrusId
-						.toLowerCase()
-						.includes(filters.searchQuery.toLowerCase()))
-			)
-		})
-	}, [data.items, filters])
+		return (
+			data?.items?.filter((patient) => {
+				return (
+					(filters.species === '' ||
+						patient.Species === filters.species) &&
+					(filters.gender === '' ||
+						patient.Gender === filters.gender) &&
+					(filters.isDeceased === null ||
+						patient.IsDeceased === filters.isDeceased) &&
+					(filters.searchQuery === '' ||
+						patient.Name.toLowerCase().includes(
+							filters.searchQuery.toLowerCase()
+						) ||
+						patient.BreedDescription.toLowerCase().includes(
+							filters.searchQuery.toLowerCase()
+						) ||
+						patient.covetrusId
+							.toLowerCase()
+							.includes(filters.searchQuery.toLowerCase()))
+				)
+			}) || []
+		)
+	}, [data?.items, filters])
 
 	const startIdx = (localPage - 1) * itemsPerPage
 	const endIdx = startIdx + itemsPerPage
-	const paginatedItems = filteredItems.slice(startIdx, endIdx)
+	const paginatedItems = filteredItems?.slice(startIdx, endIdx)
 	const totalPages = Math.ceil(filteredItems.length / itemsPerPage)
 
 	const resetFilters = () => {
