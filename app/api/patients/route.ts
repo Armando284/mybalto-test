@@ -17,7 +17,6 @@ export async function GET() {
     }
 
     const data = await response.json();
-    console.log('Fetched data:', data);
     const validatedData = PatientsResponseSchema.parse(data);
 
     return NextResponse.json(validatedData);
