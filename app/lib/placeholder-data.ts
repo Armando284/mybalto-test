@@ -1,5 +1,33 @@
 import { PatientsResponse } from "./definitions";
 
+export const MOCK_STORY_EXAMPLES = [
+  `**Help Max Get Back on His Feet: A Desperate Plea for a Total Hip Replacement**
+
+Meet Max, our loyal and loving emotional support dog who brings joy and comfort to our entire family, especially our autistic son. Max has been by our side through thick and thin, providing a sense of calm and stability that has been invaluable to our son's well-being. One of our favorite memories is when Max learned to fetch the newspaper every morning, a task he still performs with enthusiasm to this day. However, Max's health has taken a turn for the worse, and he's now struggling with severe hip dysplasia that makes everyday activities a painful challenge.
+
+The diagnosis is severe hip dysplasia, and the recommended treatment is a total hip replacement surgery. The estimated cost of this surgery is $4500, a significant expense that has left us feeling overwhelmed and uncertain about how to proceed. As a family, we've already had to make significant adjustments to care for Max, including taking time off work to manage his condition and ensure he receives the attention he needs. Despite our best efforts, Max's condition continues to deteriorate, and we know that surgery is the only way to give him a chance at a pain-free life.
+
+Max is more than just a pet - he's a vital member of our family and a lifeline to our son. His emotional support and companionship have been instrumental in helping our son navigate the challenges of autism. Without Max, our son's world would be a much darker and more isolating place. That's why we're reaching out for help to ensure Max receives the medical care he needs. Your donation will directly contribute to covering the cost of his surgery, allowing us to focus on what matters most - getting Max back on his feet and continuing to provide a loving and supportive environment for our son.
+
+We're counting on your kindness and generosity to help Max get the medical care he desperately needs. Every donation, no matter how small, brings us closer to securing the funds needed for his surgery. Please consider making a donation today to help us give Max a second chance at a happy, healthy life. Together, we can make a difference and ensure that Max continues to be a source of comfort, love, and support for our family. **Donate now and help us get Max back on his feet!**`,
+  `Lilly, my beloved cat, has been a constant source of comfort and companionship since my grandmother passed away. She's more than just a pet - she's the last connection I have to her. Lilly was a gift from my grandmother, and every time I look into her eyes, I'm reminded of the love and memories we shared. Recently, Lilly was diagnosed with chronic kidney disease stage 3, and our world has been turned upside down.
+
+As Lilly's condition progresses, she requires a specialized diet and ongoing fluid therapy to manage her symptoms and slow disease progression. Our veterinarian estimates that the cost of her treatment will be around $2800, which is a significant burden for our family. As a single-parent household with limited income, we've already exhausted our emergency savings on Lilly's initial vet visits and testing. Despite the financial strain, we're committed to giving Lilly the best possible care and ensuring she receives the treatment she needs to thrive.
+
+What makes Lilly's situation even more special is the bond we share. Every evening, without fail, Lilly curls up on my lap and purrs contentedly, providing a sense of calm and peace after a long day. It's a simple yet profound moment that I cherish deeply. I'm not just fighting for Lilly's health - I'm fighting to preserve the memories and comfort she brings to my life. Your support would mean the world to us, and every donation will go directly towards covering Lilly's medical expenses.
+
+If you're able to help, please consider making a donation to Lilly's medical fund. Your contribution, no matter how big or small, will bring us one step closer to securing the care Lilly needs. With your help, we can ensure that Lilly receives the treatment she deserves and continues to bring joy and comfort to our lives. Please share Lilly's story with your friends and family, and consider making a donation today. Thank you for caring about Lilly and our family's well-being.`,
+  `**Help Cooper Breathe Easy Again**
+
+Our beloved pet, Cooper, a sweet and playful dog, has been struggling with Brachycephalic airway obstruction syndrome, a condition that's making everyday life a challenge for him. This painful condition causes his airway to narrow, making it difficult for him to breathe, especially during hot weather or exercise. Our veterinarian has recommended airway corrective surgery to alleviate his symptoms and improve his quality of life. The estimated cost of this surgery is $3800, which is a significant expense for our family right now.
+
+Cooper is more than just a pet - he's a cherished member of our family and a vital source of comfort and support for our daughter, who lives with anxiety disorder. He has a special gift for sensing her emotions and providing gentle companionship when she needs it most. One of our favorite memories is when he learned to give high-fives - it's a simple joy that brings a big smile to our faces. We've had to make some tough sacrifices for his care, including canceling our family vacation to pay for initial treatment. Now, with a recent job loss in our household, we're facing an even greater financial strain.
+
+Your help would mean the world to us. By contributing to Cooper's medical fund, you'll be directly supporting his surgery and helping him breathe easy again. Your donation will help cover the cost of his surgery, ensuring that he can continue to provide love and comfort to our daughter. Every little bit counts, and we're grateful for any amount you can give. Your kindness will not only improve Cooper's life but also bring peace of mind to our family during a challenging time.
+
+Please consider making a donation today to help Cooper receive the life-changing surgery he needs. Your generosity will bring relief to our family and ensure that Cooper can continue to thrive as a beloved companion to our daughter. Donate now and help us give Cooper a second chance at a happy, healthy life.`,
+] as const
+
 export const MockPatients: PatientsResponse = {
   "itemsReceived": 1000,
   "curPage": 1,
