@@ -1,26 +1,39 @@
-export const formatCurrency = (amount: number) => {
-  return (amount / 100).toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
-};
+// app/components/PatientCharts/utils.ts
+import { type Item } from '../lib/definitions';
 
-export const formatDateToLocal = (
-  dateStr: string,
-  locale: string = 'en-US',
-) => {
-  const date = new Date(dateStr);
-  const options: Intl.DateTimeFormatOptions = {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
+export function processChartData(patients: Item[]) {
+  const speciesData = patients.reduce((acc, patient) => {
+    const key = patient.SpeciesDescription;
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const genderData = patients.reduce((acc, patient) => {
+    const key = patient.GenderDescription;
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const statusData = patients.reduce((acc, patient) => {
+    const key = patient.IsDeceased ? 'Deceased' : patient.Inactive ? 'Inactive' : 'Active';
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const ageData = patients
+    .filter(p => p.DateOfBirth)
+    .map(p => {
+      const birthDate = new Date(p.DateOfBirth!);
+      const age = new Date().getFullYear() - birthDate.getFullYear();
+      return age;
+    });
+
+  return {
+    species: Object.entries(speciesData).map(([name, value]) => ({ name, value })),
+    gender: Object.entries(genderData).map(([name, value]) => ({ name, value })),
+    status: Object.entries(statusData).map(([name, value]) => ({ name, value })),
+    ages: ageData,
   };
-  const formatter = new Intl.DateTimeFormat(locale, options);
-  return formatter.format(date);
-};
-
-export const isBase64Image = (str: string): boolean => {
-  return /^data:image\/(png|jpeg|jpg|gif|webp);base64,/.test(str);
 }
 
 export function promisifyWithDelay<T>(
