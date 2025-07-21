@@ -19,11 +19,7 @@ import {
 	ArrowPathIcon,
 } from '@heroicons/react/24/outline'
 
-export default function ClientGrid({
-	initialData,
-}: {
-	initialData: PatientsResponse
-}) {
+export default function ClientGrid() {
 	const [localPage, setLocalPage] = useState(1)
 	const [itemsPerPage, setItemsPerPage] = useState(12)
 
@@ -38,7 +34,6 @@ export default function ClientGrid({
 	const { data, isLoading, refetch } = useQuery({
 		queryKey: ['patients'],
 		queryFn: () => fetchPatients(),
-		initialData,
 	})
 
 	const filteredItems = useMemo(() => {
@@ -252,8 +247,8 @@ export default function ClientGrid({
 			<div className="text-sm text-gray-600">
 				Showing {paginatedItems.length} of {filteredItems.length}{' '}
 				patients
-				{filteredItems.length !== data.items.length &&
-					` (filtrados de ${data.items.length} totales)`}
+				{filteredItems.length !== data?.items.length &&
+					` (filtrados de ${data?.items.length} totales)`}
 			</div>
 
 			{isLoading ? (

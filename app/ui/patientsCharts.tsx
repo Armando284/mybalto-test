@@ -21,15 +21,10 @@ import { fetchPatients } from '../lib/api/client'
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8']
 
-export default function PatientCharts({
-	initialData,
-}: {
-	initialData: PatientsResponse
-}) {
+export default function PatientCharts() {
 	const { data, isLoading, refetch } = useQuery({
 		queryKey: ['patients'],
 		queryFn: () => fetchPatients(),
-		initialData,
 	})
 
 	const patients: Item[] = data?.items || []
